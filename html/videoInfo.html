@@ -1,0 +1,33 @@
+{% extends 'mainFrame.html' %}
+
+{% block title %}{{ yt.title }}{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" href="/public/css/btn.css">
+{% endblock %}
+
+{% block content %}
+	<h1>{{ yt.title }}</h1>
+	<iframe class="vidEmbed" src="https://www.youtube.com/embed/{{ videoID }}" frameborder="0" allowfullscreen></iframe>
+	<p>Author: <a href="{{ yt.channel_url }}" target="_blank">{{ yt.author }}</a></p>
+	<p>Views: {{ views }}</p>
+	<p>Length: {{ length }}</p>
+	<p>Description: {% if yt.description %}{{ yt.description }}{% else %}No Description{% endif %}</p>
+	<br><br>
+	<form method="post" action="{{ url_for('download') }}">
+		<label for="video_url">Video URL:</label>
+		<input class="inputBox" type="text" id="video_url" name="video_url" value="{{ YTVideoURL }}">
+		<label for="stream">Select stream:</label>
+    <select name="stream" id="stream" class="dropDown">
+			<option value="Video" disabled>Video</option>
+      {% for vidStream in videoStreams %}
+        <option value="{{ stream.itag }}">{{ vidStream.resolution }} ({{ vidStream.mime_type }}) - {{ vidStream.filesize_mb|round(1) }}MB</option>
+      {% endfor %}
+			<option value="Audio" disabled>Audio</option>
+      {% for audStream in audioStreams %}
+        <option value="{{ stream.itag }}">{{ audStream.abr }} ({{ audStream.mime_type }}) - {{ audStream.filesize_mb|round(1) }}MB</option>
+      {% endfor %}
+    </select>
+		<button type="submit" class="btn">Download</button>
+	</form>
+{% endblock %}
