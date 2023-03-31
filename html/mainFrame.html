@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>{% block title %}{% endblock %} - {{ websiteTitle }}</title>
+		<link rel="icon" type="image/x-icon" href="/public/img/favicon.ico">
+		<link rel="stylesheet" href="/public/css/global.css">
+    <link rel="stylesheet" href="/public/css/navbar.css">
+		<link rel="stylesheet" href="/public/css/footer.css">
+		{% block css %}{% endblock %}
+  </head>
+  <body>
+    <header class="navbar">
+      <a href="{{ request.url_root }}" class="logo">DownTube</a>
+      <ul>
+        <li><a href="{{ request.url_root }}">Home</a></li>
+      </ul>
+    </header>
+		<main class="main">
+			{% block content %}{% endblock %}
+		</main>
+		<div class="ADSpace">AD-Space</div>
+    <script type="text/javascript">
+      window.addEventListener("scroll", function(){
+        var header = document.querySelector("header");
+        header.classList.toggle("sticky", window.scrollY != 0)
+      });
+    </script>
+  </body>
+</html>
