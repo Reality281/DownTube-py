@@ -26,12 +26,13 @@ body {
   background-color: #4e4e4e;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+	box-shadow: 0 0 10px 0 red;
 }
 
 .navbar .logo {
   position: relative;
   font-weight: 700;
-  color: #fff;
+  color: #000;
   text-decoration: none;
   font-size: 2em;
   text-transform: uppercase;
@@ -59,7 +60,7 @@ body {
   position: relative;
   margin: 0 15px;
   text-decoration: none;
-  color: #fff;
+  color: #000;
   letter-spacing: 2px;
   font-weight: 500px;
   transition: 0.6s;
@@ -95,8 +96,17 @@ body {
 
 
 @media (prefers-color-scheme: dark) {
+	.navbar .logo {
+		color: #fff;
+	}
+	
+	.navbar ul li a {
+		color: #fff;
+	}
+	
   .navbar.sticky {
     background-color: #fff;
+		box-shadow: 0 0 10px 0 red;
   }
 
   .navbar.sticky .logo {
