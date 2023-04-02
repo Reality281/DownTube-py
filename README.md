@@ -9,7 +9,7 @@
 - Click on "Download" to start the download
 
 # Fork it on [Replit](replit.com)
-⚠️ It is recommended to just use our site [DownTube](https://DownTube.reality281.repl.co) to download YT Videos rather than forking it and using it.
+⚠️ It is recommended to just use our site [DownTube](https://DownTube.reality281.repl.co) to download YT Videos rather than forking the code and using it.
 
 - [Click Me](https://replit.com/@Reality281/DownTube?v=1) to visit the code of [DownTube](https://DownTube.reality281.repl.co) on [Replit](replit.com)
 - Click the fork button in replit to fork the code
