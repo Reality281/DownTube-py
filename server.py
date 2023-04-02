@@ -49,11 +49,17 @@ def getVideoLink(url):
 
 def showError(videoURL, errURL, err):
 	print(f'An Error Occured in "{errURL}" url:\n', err)
-	if errURL == '/download':
-		errURL = 'downloading'
-	elif errURL == '/get_video':
-		errURL = 'getting information of'
-	return f'<link rel="icon" type="image/x-icon" href="/public/img/favicon.ico"><title>Error - DownTube</title>An error occured while {errURL} the youtube video "{getVideoLink(videoURL)}"'
+	if videoURL == 'noURL':
+		title = 'No URL Provided'
+	else:
+		title = 'Error'
+		if errURL == '/download':
+			errURL = 'downloading'
+		elif errURL == '/get_video':
+			errURL = 'getting information of'
+	return render_template('err.html',
+	                       title=title,
+	                       videoURL=getVideoLink(videoURL))
 
 
 def delOldVids():
@@ -88,14 +94,14 @@ def favicon():
 @app.route('/get_video/', methods=['POST'])
 def getVideoInfo():
 	delOldVids()
-	try:
+	if request.form['video_url']:
 		YTVideoURL = getVideoLink(request.form['video_url'])
+	else:
+		showError(videoURL='noURL', errURL='/get_video', err='No URL Provided')
+	try:
 		yt = YouTube(YTVideoURL)
 		views = yt.views
 		length = yt.length
-		print(
-		 yt.streams.filter(only_audio=False,
-		                   only_video=False).order_by('resolution'))
 		return render_template(
 		 'videoInfo.html',
 		 yt=yt,
@@ -104,29 +110,29 @@ def getVideoInfo():
 		 websiteTitle=websiteTitle,
 		 videoID=yt.video_id,
 		 YTVideoURL=YTVideoURL,
-		 videoStreams=yt.streams.filter(only_audio=False,
-		                                only_video=False,
-		                                subtype='mp4').order_by('resolution'))
+		 videoStreams=yt.streams.filter(progressive=True).order_by('resolution'),
+		 audioStreams=yt.streams.filter(only_audio=True))
 	except Exception as e:
-		URL = request.form['video_url']
-		return showError(videoURL=URL, errURL='/get_video', err=e)
+		return showError(videoURL=YTVideoURL, errURL='/get_video', err=e)
 
 
 @app.route('/download/', methods=['POST'])
 def download():
 	delOldVids()
+	if request.form['video_url']:
+		YTVideoURL = getVideoLink(request.form['video_url'])
+	else:
+		showError(videoURL='noURL', errURL='/get_video', err='No URL Provided')
 	try:
-		url = request.form['video_url']
 		itag = request.form['stream']
-		yt = YouTube(url)
+		yt = YouTube(YTVideoURL)
 		stream = yt.streams.get_by_itag(itag)
 		video = stream.download(output_path='./public/vids/')
 		file = video.split("//")[-1]
 		return send_file(file, as_attachment=True)
 	except Exception as e:
-		URL = request.form['video_url']
-		return showError(videoURL=URL, errURL='/download', err=e)
+		return showError(videoURL=YTVideoURL, errURL='/download', err=e)
 
 
 if __name__ == "__main__":
-	app.run(host='0.0.0.0', port=3000)
+	app.run(host='0.0.0.0')
