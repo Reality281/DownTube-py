@@ -1,0 +1,32 @@
+.btn {
+    font-size: 20px;
+    padding: 10px 16px;
+    margin: 1em;
+    cursor: pointer;
+    transition: 200ms linear;
+    border: none;
+    border-radius: 6px;
+    background: #000;
+    color: #fff;
+    box-shadow: 2px 2px 0 0 #fff,
+        2px 2px 0 1px #000;
+}
+
+.btn:hover {
+    color: #00dcff;
+}
+
+.btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 0 #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+    .btn {
+        box-shadow: 2px 2px 0 0 #333,
+            2px 2px 0 1px #000;
+    }
+    .btn:active {
+        box-shadow: 0 0 0 0 #333;
+    }
+}
