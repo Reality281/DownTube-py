@@ -1,0 +1,28 @@
+{% extends 'mainFrame.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block css %}
+	<link rel="stylesheet" href="/public/css/btn.css">
+	<link rel="stylesheet" href="/public/css/tutorialBox.css">
+{% endblock %}
+
+{% block content %}
+	<h1>Download Youtube Video for free!</h1>
+	<form method="post" action="{{ url_for('getVideoInfo') }}">
+		<label for="video_url" name="Video URL">Enter a YouTube video URL:</label>
+		<input class="inputBox" type="text" name="video_url" id="video_url" autocomplete="off" required>
+		<button type="submit" class="btn">Get Info</button>
+	</form>
+
+	<div class='tutorialBox'>
+		Tutorial to download a YouTube video/shorts:
+		<ul class='listTypeNums'>
+			<li>Copy the YouTube video/shorts url</li>
+			<li>Paste the URL in the URL box</li>
+			<li>Click on "Get Info" to get the information about the video/shorts</li>
+			<li>Choose the video quality from the dropdown menu</li>
+			<li>Click on "Download" to start the download</li>
+		</ul>
+	</div>
+{% endblock %}
