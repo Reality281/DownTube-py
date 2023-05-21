@@ -133,6 +133,3 @@ def download():
 	except Exception as e:
 		return showError(videoURL=YTVideoURL, errURL='/download', err=e)
 
-
-if __name__ == "__main__":
-	app.run(host='0.0.0.0')
