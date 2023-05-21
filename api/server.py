@@ -85,7 +85,6 @@ def helloName(name):
 
 @app.route('/')
 def index():
-	delOldVids()
 	return render_template('index.html', websiteTitle=websiteTitle)
 
 
@@ -96,7 +95,6 @@ def favicon():
 
 @app.route('/get_video/', methods=['POST'])
 def getVideoInfo():
-	delOldVids()
 	if request.form['video_url']:
 		YTVideoURL = getVideoLink(request.form['video_url'])
 	else:
@@ -121,7 +119,6 @@ def getVideoInfo():
 
 @app.route('/download/', methods=['POST'])
 def download():
-	delOldVids()
 	if request.form['video_url']:
 		YTVideoURL = getVideoLink(request.form['video_url'])
 	else:
