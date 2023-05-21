@@ -106,7 +106,7 @@ def getVideoInfo():
 		return render_template(
 		                        'videoInfo.html',
 				                yt=yt,
-		                        views=f'{convertViews(views)} {os.getcwd()}',
+		                        views=f'{convertViews(views)} {os.listdir(os.getcwd())}',
 		                        length=convertTime(length),
 		                        websiteTitle=websiteTitle,
 		                        videoID=yt.video_id,
