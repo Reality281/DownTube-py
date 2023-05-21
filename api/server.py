@@ -127,7 +127,7 @@ def download():
 		itag = request.form['stream']
 		yt = YouTube(YTVideoURL)
 		stream = yt.streams.get_by_itag(itag)
-		video = stream.download(output_path='public/vids/', filename=f'DownTube-{yt.title}.{stream.mime_type.split("/")[-1]}')
+		video = stream.download(output_path='../../api/public/vids/', filename=f'DownTube-{yt.title}.{stream.mime_type.split("/")[-1]}')
 		file = video.split("//")[-1]
 		return send_file(file, as_attachment=True)
 	except Exception as e:
