@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file, Response
+from flask import Flask, render_template, request, send_file
 from pytube import YouTube
 from datetime import datetime, timedelta
 import os
@@ -74,11 +74,6 @@ def delOldVids():
 				os.remove(filePath)
 				print(f'Deleted {filePath}')
 
-def stream_video_generator(url):
-    with closing(requests.get(url, stream=True)) as r:
-        for chunk in r.iter_content(chunk_size=8192):
-            yield chunk
-
 
 @app.errorhandler(404)
 def error404(err):
@@ -133,10 +128,9 @@ def download():
 		itag = request.form['stream']
 		yt = YouTube(YTVideoURL)
 		stream = yt.streams.get_by_itag(itag)
-		url = stream.url
-		response = Response(stream_video_generator(url), mimetype=stream.mime_type)
-		response.headers['Content-Disposition'] = 'inline'
-		return response
+		video = stream.download(output_path='./api/public/vids/', filename=f'DownTube-{yt.title}.{stream.mime_type.split("/")[-1]}')
+		file = video.split("//")[-1]
+		return send_file(file, as_attachment=True)
 	except Exception as e:
 		return showError(videoURL=YTVideoURL, errURL='/download', err=e)
 
