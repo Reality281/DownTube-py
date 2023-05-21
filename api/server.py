@@ -79,6 +79,9 @@ def delOldVids():
 def error404(err):
 	return render_template('404.html', websiteTitle=websiteTitle)
 
+@app.route('/<name>')
+def helloName(name):
+	return f'Hello {name}!'
 
 @app.route('/')
 def index():
