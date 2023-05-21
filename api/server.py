@@ -103,11 +103,10 @@ def getVideoInfo():
 		yt = YouTube(YTVideoURL)
 		views = yt.views
 		length = yt.length
-		pathtofiles = f'{os.getcwd()}/api'
 		return render_template(
 		                        'videoInfo.html',
 				                yt=yt,
-		                        views=f'{convertViews(views)} {os.listdir(pathtofiles)}',
+		                        views=convertViews(views),
 		                        length=convertTime(length),
 		                        websiteTitle=websiteTitle,
 		                        videoID=yt.video_id,
