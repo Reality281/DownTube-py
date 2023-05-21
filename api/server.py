@@ -134,7 +134,7 @@ def download():
 		yt = YouTube(YTVideoURL)
 		stream = yt.streams.get_by_itag(itag)
 		url = stream.url
-		response = Response(stream_video_generator(video_stream_url), mimetype=stream.mime_type)
+		response = Response(stream_video_generator(url), mimetype=stream.mime_type)
 		response.headers['Content-Disposition'] = 'inline'
 		return response
 	except Exception as e:
