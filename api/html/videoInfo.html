@@ -8,7 +8,6 @@
 
 {% block content %}
 	<h1>{{ yt.title }}</h1>
-	{{ s }}
 	<iframe class="vidEmbed" src="https://www.youtube.com/embed/{{ videoID }}" frameborder="0" allowfullscreen></iframe><br>
 	<p><strong>Channel: </strong><a href="{{ yt.channel_url }}" target="_blank">{{ yt.author }}</a></p>
 	<p><strong>Views: </strong>{{ views }}</p>

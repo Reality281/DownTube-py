@@ -103,11 +103,9 @@ def getVideoInfo():
 		yt = YouTube(YTVideoURL)
 		views = yt.views
 		length = yt.length
-		s = yt.streams.first().url
 		return render_template(
 		                        'videoInfo.html',
 				                yt=yt,
-								s=s,
 		                        views=convertViews(views),
 		                        length=convertTime(length),
 		                        websiteTitle=websiteTitle,
@@ -129,7 +127,9 @@ def download():
 		itag = request.form['stream']
 		yt = YouTube(YTVideoURL)
 		stream = yt.streams.get_by_itag(itag)
-		return redirect(stream.url, code=302)
+		filename = f'DownTube-{yt.title}.{stream.mime_type.split("/")[-1]}'
+		#return redirect(stream.url, code=302)
+		return send_file(stream.url, as_attachment=True, attachment_filename=filename)
 	except Exception as e:
 		return showError(videoURL=YTVideoURL, errURL='/download', err=e)
 
