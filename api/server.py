@@ -128,8 +128,7 @@ def download():
 		yt = YouTube(YTVideoURL)
 		stream = yt.streams.get_by_itag(itag)
 		filename = f'DownTube-{yt.title}.{stream.mime_type.split("/")[-1]}'
-		#return redirect(stream.url, code=302)
-		return send_file(stream.url, as_attachment=True, attachment_filename=filename)
+		return redirect(stream.url, code=302)
 	except Exception as e:
 		return showError(videoURL=YTVideoURL, errURL='/download', err=e)
 
