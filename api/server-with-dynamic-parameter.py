@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file, redirect
+from flask import Flask, render_template, request, send_file, redirect, url_for
 from pytube import YouTube
 from datetime import datetime, timedelta
 import os
@@ -31,18 +31,24 @@ def convertViews(view):
 	return view
 
 
-def getVideoLink(url):
-	videoURL = ''
+def getVideoLink(videoID):
+	videoURL = f'https://www.youtube.com/watch?v={videoID}'
+	""""""
+	return videoURL
+
+
+def getVideoID(url):
+	videoID = None
+	shortsID = None
 	if 'm.youtube.com/' in url:
 		url = url.replace('m.youtube.com', 'www.youtube.com')
 	if 'youtu.be' in url:
 		videoID = url.strip('/').split('/')[-1]
-		videoURL = f'https://www.youtube.com/watch?v={videoID}'
 	elif 'youtube.com/watch?v=' in url:
-		videoURL = url.strip('/')
+		videoID = url.strip('/').split('watch?v=')[-1]
 	elif 'youtube.com/shorts/' in url:
-		videoURL = url.strip('/').split('?')[0]
-	return videoURL
+		videoID = url.strip('/').split('?')[0].split('shorts/')[-1]
+	return videoID
 
 
 def showError(videoURL, errURL, err):
@@ -93,10 +99,23 @@ def favicon():
 	return '<img src="/public/img/favicon.ico">'
 
 
-@app.route('/get_video/', methods=['POST'])
-def getVideoInfo():
-	if request.form['video_url']:
-		YTVideoURL = getVideoLink(request.form['video_url'])
+@app.route('/redirect/', methods=['POST'])
+def redirect():
+	if request.form['video_url'] and request.form['stream']:
+		videoID = getVideoID(request.form['video_url'])
+		streamITag = request.form['stream']
+		return redirect('download', videoID=videoID, streamITag=streamITag)
+	elif request.form['video_url'] and not request.form['stream']:
+		videoID = getVideoID(request.form['video_url'])
+		return redirect(url_for('video', videoID=videoID))
+	else:
+		showError(videoURL='noURL', errURL='/get_video', err='No URL Provided')
+
+
+@app.route('/video/<videoID>/')
+def videoInfo(videoID):
+	if videoID:
+		YTVideoURL = getVideoLink(videoID)
 	else:
 		showError(videoURL='noURL', errURL='/get_video', err='No URL Provided')
 	try:
@@ -117,17 +136,16 @@ def getVideoInfo():
 		return showError(videoURL=YTVideoURL, errURL='/get_video', err=e)
 
 
-@app.route('/download/', methods=['POST'])
-def download():
-	if request.form['video_url']:
-		YTVideoURL = getVideoLink(request.form['video_url'])
+@app.route('/download/<videoID>/<streamITag>/')
+def downloadVideo(videoID, streamITag):
+	if videoID:
+		YTVideoURL = getVideoLink(videoID)
 	else:
 		showError(videoURL='noURL', errURL='/get_video', err='No URL Provided')
 	try:
-		itag = request.form['stream']
 		yt = YouTube(YTVideoURL)
-		stream = yt.streams.get_by_itag(itag)
-		filename = f'DownTube-{yt.title}.{stream.mime_type.split("/")[-1]}'
+		stream = yt.streams.get_by_itag(streamITag)
+		#filename = f'DownTube-{yt.title}.{stream.mime_type.split("/")[-1]}'
 		return redirect(stream.url, code=302)
 	except Exception as e:
 		return showError(videoURL=YTVideoURL, errURL='/download', err=e)
