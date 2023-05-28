@@ -99,7 +99,7 @@ def favicon():
 	return '<img src="/public/img/favicon.ico">'
 
 
-@app.route('/redirect/')
+@app.route('/redirect/', methods=['POST'])
 def redirect():
 	if request.form['video_url'] and request.form['stream']:
 		videoID = getVideoID(request.form['video_url'])
