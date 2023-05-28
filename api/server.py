@@ -103,6 +103,7 @@ def getVideoInfo():
 		yt = YouTube(YTVideoURL)
 		views = yt.views
 		length = yt.length
+		s = yt.streams.first().url
 		return render_template(
 		                        'videoInfo.html',
 				                yt=yt,
@@ -127,7 +128,6 @@ def download():
 		itag = request.form['stream']
 		yt = YouTube(YTVideoURL)
 		stream = yt.streams.get_by_itag(itag)
-		print(stream.url)
 		return redirect(stream.url, code=302)
 	except Exception as e:
 		return showError(videoURL=YTVideoURL, errURL='/download', err=e)
