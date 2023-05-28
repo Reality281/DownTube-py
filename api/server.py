@@ -103,7 +103,7 @@ def getVideoInfo():
 		yt = YouTube(YTVideoURL)
 		views = yt.views
 		length = yt.length
-		s = yt.streams.first().get_url()
+		s = yt.stream.get_url()
 		return render_template(
 		                        'videoInfo.html',
 								s=s,
