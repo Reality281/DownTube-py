@@ -112,7 +112,7 @@ def redirect():
 		showError(videoURL='noURL', errURL='/get_video', err='No URL Provided')
 
 
-@app.route('/video/<videoID>/', methods=['POST'])
+@app.route('/video/<videoID>/')
 def videoInfo(videoID):
 	if videoID:
 		YTVideoURL = getVideoLink(videoID)
@@ -136,7 +136,7 @@ def videoInfo(videoID):
 		return showError(videoURL=YTVideoURL, errURL='/get_video', err=e)
 
 
-@app.route('/download/<videoID>/<streamITag>/', methods=['POST'])
+@app.route('/download/<videoID>/<streamITag>/')
 def downloadVideo(videoID, streamITag):
 	if videoID:
 		YTVideoURL = getVideoLink(videoID)
