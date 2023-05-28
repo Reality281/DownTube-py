@@ -126,7 +126,7 @@ def download():
 	try:
 		itag = request.form['stream']
 		yt = YouTube(YTVideoURL)
-		stream = yt.streams.first()
+		stream = yt.streams.get_by_itag(itag)
 		return redirect(stream.url, code=302)
 	except Exception as e:
 		return showError(videoURL=YTVideoURL, errURL='/download', err=e)
