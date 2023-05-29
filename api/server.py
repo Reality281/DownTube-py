@@ -76,7 +76,7 @@ def showError(videoURL, errURL, err):
                             title=title,
                             websiteTitle=websiteTitle,
                             errURL=errURL,
-                            videoURL=getVideoLink(videoURL))
+                            videoURL=videoURL)
 
 
 def delOldVids():
@@ -166,9 +166,7 @@ def download(videoID, streamITag):
 		yt = YouTube(YTVideoURL)
 		stream = yt.streams.get_by_itag(streamITag)
 		filename = f'DownTube-{yt.title}.{stream.mime_type.split("/")[-1]}'
-		#return redirect(stream.url, code=302)
-		newTabScript = f'<script>window.open("{stream.url}","_blank");</script>'
-		return redirect(url_for('getVideoInfo', videoID=videoID)) + newTabScript
+		return redirect(stream.url, code=302)
 	except Exception as e:
 		return showError(videoURL=YTVideoURL, errURL='/download', err=e)
 
