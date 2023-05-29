@@ -2,94 +2,12 @@ from flask import Flask, render_template, request, send_file, redirect, url_for
 from pytube import YouTube
 from datetime import datetime, timedelta
 import os
+from utils.convertors import convertTime, convertViews
+from utils.videoFuncs import getVideoID, getVideoLink
+from utils.err import showError
 
 app = Flask(__name__, template_folder='html', static_folder='public')
 websiteTitle = 'DownTube'
-
-def convertTime(sec):
-	time = ''
-	dur = {
-		'Years': 365 * 24 * 3600,
-		'Days': 24 * 3600,
-		'Hours': 3600,
-		'Minutes': 60
-    }
-	for d in dur.keys():
-		if int(sec) // dur[d]:
-			time += f"{sec//dur[d]} {d} "
-			sec %= dur[d]
-	if sec:
-		time += f"{sec} Seconds"
-	return time
-
-def convertViews(view):
-	views = {'Crore': 10000000, 'Lakh': 100000, 'Thousand': 1000}
-	for v in views.keys():
-		if isinstance(view, int):
-			if view // views[v]:
-				view = f"{round(view/views[v], 1)} {v}"
-	return view
-
-
-def getVideoID(url):
-	if 'm.youtube.com/' in url:
-		url = url.replace('m.youtube.com', 'www.youtube.com')
-	if 'youtu.be' in url:
-		videoID = url.strip('/').split('/')[-1]
-	elif 'youtube.com/watch?v=' in url:
-		videoID = url.strip('/').split('watch?v=')[-1]
-	elif 'youtube.com/shorts/' in url:
-		videoID = url.strip('/').split('?')[0].split('shorts/')[-1]
-	return videoID
-
-
-def getVideoLink(videoID):
-	videoURL = f'https://www.youtube.com/watch?v={videoID}'
-	return videoURL
-
-
-def getVideoLink2(url):
-	videoURL = ''
-	if 'm.youtube.com/' in url:
-		url = url.replace('m.youtube.com', 'www.youtube.com')
-	if 'youtu.be' in url:
-		videoID = url.strip('/').split('/')[-1]
-		videoURL = f'https://www.youtube.com/watch?v={videoID}'
-	elif 'youtube.com/watch?v=' in url:
-		videoURL = url.strip('/')
-	elif 'youtube.com/shorts/' in url:
-		videoURL = url.strip('/').split('?')[0]
-	return videoURL
-
-
-def showError(videoURL, errURL, err):
-	print(f'An Error Occured in "{errURL}" url:\n', err)
-	if videoURL == 'noURL':
-		title = 'No URL Provided'
-	else:
-		title = 'Error'
-		if errURL == '/download':
-			errURL = 'downloading'
-		elif errURL == '/get_video':
-			errURL = 'getting information of'
-	return render_template('err.html',
-                            title=title,
-                            websiteTitle=websiteTitle,
-                            errURL=errURL,
-                            videoURL=videoURL)
-
-
-def delOldVids():
-	folder = './public/vids/'
-	currentTime = datetime.now()
-	oneHourAgo = currentTime - timedelta(hours=1)
-	for file in os.listdir(folder):
-		filePath = os.path.join(folder, file)
-		if os.path.isfile(filePath):
-			creationTime = datetime.fromtimestamp(os.path.getctime(filePath))
-			if creationTime < oneHourAgo:
-				os.remove(filePath)
-				print(f'Deleted {filePath}')
 
 
 @app.errorhandler(404)
