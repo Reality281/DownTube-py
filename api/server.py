@@ -125,7 +125,7 @@ def redirectToVideoInfoPage():
 		showError(videoURL='noURL', errURL='/get_video', err='No URL Provided')
 
 
-@app.route('/video/<videoID>/', methods=['POST'])
+@app.route('/video/<videoID>/')
 def getVideoInfo(videoID):
 	YTVideoURL = getVideoLink(videoID)
 	try:
