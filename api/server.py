@@ -2,9 +2,9 @@ from flask import Flask, render_template, request, send_file, redirect, url_for
 from pytube import YouTube
 from datetime import datetime, timedelta
 import os
-from DownTube.utils.convertors import convertTime, convertViews
-from DownTube.utils.videoFuncs import getVideoID, getVideoLink
-from DownTube.utils.err import showError
+from .utils.convertors import convertTime, convertViews
+from .utils.videoFuncs import getVideoID, getVideoLink
+from .utils.err import showError
 
 app = Flask(__name__, template_folder='html', static_folder='public')
 websiteTitle = 'DownTube'
