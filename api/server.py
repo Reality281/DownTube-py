@@ -90,7 +90,7 @@ def index():
 
 @app.route('/favicon.ico/')
 def favicon():
-	return '<img src="/public/img/favicon.ico">'
+	return render_template('favicon.html', websiteTitle=websiteTitle)
 
 
 @app.route('/get_video/', methods=['POST'])

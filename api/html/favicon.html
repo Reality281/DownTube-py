@@ -1,0 +1,24 @@
+{% extends "mainFrame.html" %}
+
+{% block title %}Favicon{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" href="/public/css/btn.css">
+  <style>
+    html, body {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <img src="/public/img/favicon.ico" alt="DownTube-Logo">
+  <a href="{{ request.url_root }}"><button class="btn">Return to Home Page</button></a>
+{% endblock %}
