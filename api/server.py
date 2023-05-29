@@ -149,13 +149,13 @@ def getVideoInfo(videoID):
 @app.route('/download/', methods=['POST'])
 def redirectToVideoDownloadPage():
 	if request.form['video_url']:
-		YTVideoURL = getVideoID(request.form['video_url'])
+		videoID = getVideoID(request.form['video_url'])
 	else:
 		return showError(videoURL='noURL', errURL='/download', err='No URL Provided')
 	if request.form['stream']:
 		streamITag = request.form['stream']
 	else:
-		return showError(videoURL=YTVideoURL, errURL='/download', err='No Stream Provided')
+		return showError(videoURL=getVideoLink(videoID), errURL='/download', err='No Stream Provided')
 	return redirect(url_for('download', videoID=videoID, streamITag=streamITag))
 
 
