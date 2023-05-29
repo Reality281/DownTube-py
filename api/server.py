@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file, redirect
+from flask import Flask, render_template, request, send_file, redirect, url_for
 from pytube import YouTube
 from datetime import datetime, timedelta
 import os
@@ -114,7 +114,7 @@ def favicon():
 def redirectToVideoInfoPage():
 	if request.form['video_url']:
 		videoID = getVideoID(request.form['video_url'])
-		return redirect(f"{get_url('getVideoInfo')}/{videoID}")
+		return redirect(f"{url_for('getVideoInfo')}/{videoID}")
 	else:
 		showError(videoURL='noURL', errURL='/get_video', err='No URL Provided')
 
