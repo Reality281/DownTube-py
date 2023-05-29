@@ -93,7 +93,7 @@ def favicon():
 	return render_template('favicon.html', websiteTitle=websiteTitle)
 
 
-@app.route('/get_video/', methods=['POST'])
+@app.route('/video/', methods=['POST'])
 def getVideoInfo():
 	if request.form['video_url']:
 		YTVideoURL = getVideoLink(request.form['video_url'])
