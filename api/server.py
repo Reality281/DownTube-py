@@ -31,7 +31,24 @@ def convertViews(view):
 	return view
 
 
-def getVideoLink(url):
+def getVideoID(url):
+	if 'm.youtube.com/' in url:
+		url = url.replace('m.youtube.com', 'www.youtube.com')
+	if 'youtu.be' in url:
+		videoID = url.strip('/').split('/')[-1]
+	elif 'youtube.com/watch?v=' in url:
+		videoID = url.strip('/').split('watch?v=')[-1]
+	elif 'youtube.com/shorts/' in url:
+		videoID = url.strip('/').split('?')[0].split('shorts/')[-1]
+	return videoID
+
+
+def getVideoLink(videoID):
+	videoURL = f'https://www.youtube.com/watch?v={videoID}'
+	return videoURL
+
+
+def getVideoLink2(url):
 	videoURL = ''
 	if 'm.youtube.com/' in url:
 		url = url.replace('m.youtube.com', 'www.youtube.com')
@@ -94,11 +111,17 @@ def favicon():
 
 
 @app.route('/video/', methods=['POST'])
-def getVideoInfo():
+def redirectToVideoInfoPage():
 	if request.form['video_url']:
-		YTVideoURL = getVideoLink(request.form['video_url'])
+		videoID = getVideoID(request.form['video_url'])
+		return redirect(f"{get_url('getVideoInfo')}/{videoID}")
 	else:
 		showError(videoURL='noURL', errURL='/get_video', err='No URL Provided')
+
+
+@app.route('/video/<videoID>/', methods=['POST'])
+def getVideoInfo(videoID):
+	YTVideoURL = getVideoLink(videoID)
 	try:
 		yt = YouTube(YTVideoURL)
 		views = yt.views

@@ -33,7 +33,6 @@ def convertViews(view):
 
 def getVideoLink(videoID):
 	videoURL = f'https://www.youtube.com/watch?v={videoID}'
-	""""""
 	return videoURL
 
 
