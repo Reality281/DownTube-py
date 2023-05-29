@@ -120,7 +120,7 @@ def favicon():
 def redirectToVideoInfoPage():
 	if request.form['video_url']:
 		videoID = getVideoID(request.form['video_url'])
-		return redirect(f"{url_for('getVideoInfo')}/{videoID}")
+		return redirect(url_for('getVideoInfo', videoID=videoID))
 	else:
 		showError(videoURL='noURL', errURL='/get_video', err='No URL Provided')
 
