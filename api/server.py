@@ -147,15 +147,24 @@ def getVideoInfo(videoID):
 
 
 @app.route('/download/', methods=['POST'])
-def download():
+def redirectToVideoDownloadPage():
 	if request.form['video_url']:
-		YTVideoURL = getVideoLink(request.form['video_url'])
+		YTVideoURL = getVideoID(request.form['video_url'])
 	else:
-		showError(videoURL='noURL', errURL='/get_video', err='No URL Provided')
+		return showError(videoURL='noURL', errURL='/download', err='No URL Provided')
+	if request.form['stream']:
+		streamITag = request.form['stream']
+	else:
+		return showError(videoURL=YTVideoURL, errURL='/download', err='No Stream Provided')
+	return redirect(url_for('download', videoID=videoID, streamITag=streamITag))
+
+
+@app.route('/download/<videoID>/<streamITag>/')
+def download(videoID, streamITag):
+	YTVideoURL = getVideoLink(videoID)
 	try:
-		itag = request.form['stream']
 		yt = YouTube(YTVideoURL)
-		stream = yt.streams.get_by_itag(itag)
+		stream = yt.streams.get_by_itag(streamITag)
 		filename = f'DownTube-{yt.title}.{stream.mime_type.split("/")[-1]}'
 		return redirect(stream.url, code=302)
 	except Exception as e:

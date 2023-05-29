@@ -12,7 +12,7 @@
 	<p><strong>Channel: </strong><a href="{{ yt.channel_url }}" target="_blank">{{ yt.author }}</a></p>
 	<p><strong>Views: </strong>{{ views }}</p>
 	<p><strong>Length: </strong>{{ length }}</p><br>
-	<form method="post" action="{{ url_for('download') }}">
+	<form method="post" action="{{ url_for('redirectToVideoDownloadPage') }}">
 		<label for="video_url">Video URL:</label>
 		<input class="inputBox" type="text" id="video_url" name="video_url" value="{{ YTVideoURL }}">
 		<label for="stream">Select Quality:</label>
