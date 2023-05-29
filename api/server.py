@@ -96,6 +96,12 @@ def delOldVids():
 def error404(err):
 	return render_template('404.html', websiteTitle=websiteTitle)
 
+
+@app.errorhandler(500)
+def error500(err):
+	return render_template('500.html', websiteTitle=websiteTitle)
+
+
 @app.route('/<name>')
 def helloName(name):
 	return f'Hello {name}!'

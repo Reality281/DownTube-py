@@ -1,6 +1,7 @@
+<!--The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.-->
 {% extends "mainFrame.html" %}
 
-{% block title %}Error 404{% endblock %}
+{% block title %}Error 500{% endblock %}
 
 {% block css %}
   <link rel="stylesheet" href="/public/css/btn.css">
@@ -20,8 +21,8 @@
 
 {% block content %}
   <div class="err">
-    <h1>Error 404 | Not Found Error</h1>
-    <h3>{{ request.url.split(request.url_root)[1].strip('/') }} - Not Found</h3>
+    <h1>Error 500 | Internal Server Error</h1>
+    <h3>{{ request.url.split(request.url_root)[1].strip('/') }} - The server encountered an internal error and was unable to complete your request</h3>
   </div>
   <a href="{{ request.url_root }}"><button class="btn">Return to Home Page</button></a>
 {% endblock %}
