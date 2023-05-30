@@ -2,7 +2,7 @@
 from flask import Flask, Response, render_template, request, send_file, redirect, url_for
 from pytube import YouTube
 from datetime import datetime, timedelta
-import os
+import os, requests
 
 # ========== [ Local Python file imports ] ==========
 from .utils.convertors import convertTime, convertViews
@@ -94,7 +94,7 @@ def download(videoID, streamITag):
 		#return redirect(stream.url, code=302)# Redirecting the user to the url to download yt video
 		#return render_template('download.html', websiteTitle=websiteTitle, url=stream.url, title=yt.title)
 		#return send_file(stream.url, mimetype=stream.mime_type, as_attachment=True, download_name=filename)
-		response = request.get(stream.url, stream=True)
+		response = requests.get(stream.url, stream=True)
 		if response.status_code == 200:
 			headers = {
 				'Content-Disposition': f'attachment; filename="{filename}"',
