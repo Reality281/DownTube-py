@@ -1,8 +1,8 @@
 # ========== [ Python module imports ] ==========
-from flask import Flask, render_template, request, send_file, redirect, url_for
+from flask import Flask, Response, render_template, request, send_file, redirect, url_for
 from pytube import YouTube
 from datetime import datetime, timedelta
-import os
+import os, requests
 
 # ========== [ Local Python file imports ] ==========
 from .utils.convertors import convertTime, convertViews
@@ -93,7 +93,15 @@ def download(videoID, streamITag):
 		filename = f'DownTube-{yt.title}.{stream.mime_type.split("/")[-1]}'# Filename of the yt video
 		#return redirect(stream.url, code=302)# Redirecting the user to the url to download yt video
 		#return render_template('download.html', websiteTitle=websiteTitle, url=stream.url, title=yt.title)
-		return send_file(stream.url, mimetype=stream.mime_type, as_attachment=True, download_name=filename)
+		#return send_file(stream.url, mimetype=stream.mime_type, as_attachment=True, download_name=filename)
+		response = requests.get(stream.url, stream=True)
+		if response.status_code == 200:
+			headers = {
+				'Content-Disposition': f'attachment; filename="{filename}"',
+				'Content-Type': f'{stream.mime_type}'
+			}
+			return Response(response.iter_content(chunk_size=4096), headers=headers)
+		return 'Failed to download the video', 500
 	except Exception as e:
 		return showError(videoURL=YTVideoURL, errURL='/download', err=e)# Displaying error if any error occurs
 
