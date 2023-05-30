@@ -41,6 +41,11 @@ def favicon():
 	return render_template('favicon.html', websiteTitle=websiteTitle)# Rendering favicon.html
 
 
+@app.route('/ads.txt/')
+def adsTxt():
+	return send_file('ads.txt')
+
+
 @app.route('/video/', methods=['POST'])# Route to redirect user to the Video Info page
 def redirectToVideoInfoPage():
 	if request.form['video_url']:
