@@ -90,9 +90,10 @@ def download(videoID, streamITag):
 	try:
 		yt = YouTube(YTVideoURL)# Getting a YouTube object using the yt video link
 		stream = yt.streams.get_by_itag(streamITag)# Getting the stream of the video the user wants to download
-		#filename = f'DownTube-{yt.title}.{stream.mime_type.split("/")[-1]}'# Filename of the yt video
+		filename = f'DownTube-{yt.title}.{stream.mime_type.split("/")[-1]}'# Filename of the yt video
 		#return redirect(stream.url, code=302)# Redirecting the user to the url to download yt video
-		return render_template('download.html', websiteTitle=websiteTitle, url=stream.url, title=yt.title)
+		#return render_template('download.html', websiteTitle=websiteTitle, url=stream.url, title=yt.title)
+		return send_file(stream.url, as_attachment=True, attachment_filename=filename)
 	except Exception as e:
 		return showError(videoURL=YTVideoURL, errURL='/download', err=e)# Displaying error if any error occurs
 
