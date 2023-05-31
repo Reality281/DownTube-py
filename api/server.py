@@ -14,6 +14,12 @@ from .utils.err import showError
 app = Flask(__name__, template_folder='html', static_folder='public')
 websiteTitle = 'DownTube'
 
+# ========== [ Flask route file registry ] ==========
+for file in os.listdir(os.path.join(os.getcwd(), 'routes')):
+	if file.endswith('.py'):
+		BPObj = __import__(f'.routes.{file[:-3]}').BPObj
+		app.register_blueprint(BPObj, url_prefix=f'/{BPObj.name}')
+
 
 # ========== [ HTTP error handlings ] ==========
 @app.errorhandler(404)# 404 Error Handling
@@ -27,7 +33,7 @@ def error500(err):
 
 
 # ========== [ Server Routes ] ==========
-@app.route('/api/<name>')# Route to api that says hello to the user
+@app.route('/api123/<name>')# Route to api that says hello to the user
 def helloName(name):
 	return f'Hello {name}!'
 
