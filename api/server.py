@@ -41,9 +41,14 @@ def favicon():
 	return render_template('favicon.html', websiteTitle=websiteTitle)# Rendering favicon.html
 
 
-@app.route('/ads.txt/')
+@app.route('/ads.txt/')# Route for display of ads.txt file
 def adsTxt():
-	return send_file('ads.txt')
+	return send_file('ads.txt')# Sending ads.txt file to display on the route
+
+
+@app.route('/devs/')# Route for display of all the developers
+def devsList():
+	return render_template('devs.html', websiteTitle=websiteTitle)# Rendering devs.html
 
 
 @app.route('/video/', methods=['POST'])# Route to redirect user to the Video Info page
