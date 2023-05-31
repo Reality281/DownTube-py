@@ -15,10 +15,12 @@ app = Flask(__name__, template_folder='html', static_folder='public')
 websiteTitle = 'DownTube'
 
 # ========== [ Flask route file registry ] ==========
-for file in os.listdir(os.path.join(os.getcwd(), 'routes')):
+"""for file in os.listdir(os.path.join(os.getcwd(), 'routes')):
 	if file.endswith('.py'):
 		BPObj = __import__(f'.routes.{file[:-3]}').BPObj
-		app.register_blueprint(BPObj, url_prefix=f'/{BPObj.name}')
+		app.register_blueprint(BPObj, url_prefix=f'/{BPObj.name}')"""
+from .routes.api import apiBP
+app.register_blueprint(apiBP, url_prefix='/api')
 
 
 # ========== [ HTTP error handlings ] ==========
