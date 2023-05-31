@@ -15,9 +15,8 @@ app = Flask(__name__, template_folder='html', static_folder='public')
 websiteTitle = 'DownTube'
 
 # ========== [ Flask route file registry ] ==========
-from .routes import api, static
-app.register_blueprint(api.apiBP, url_prefix='/api')
-app.register_blueprint(static.staticBP, url_prefix='/')
+from .routes.api import apiBP
+app.register_blueprint(apiBP, url_prefix='/api')
 
 
 # ========== [ HTTP error handlings ] ==========
@@ -35,6 +34,11 @@ def error500(err):
 @app.route('/')# Route for main page of the website
 def index():
 	return render_template('index.html', websiteTitle=websiteTitle)# Rendering index.html
+
+
+@app.route('/favicon.ico/')# Route for favicon display of the website
+def favicon():
+	return render_template('favicon.html', websiteTitle=websiteTitle)# Rendering favicon.html
 
 
 @app.route('/ads.txt/')
