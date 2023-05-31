@@ -17,7 +17,7 @@ websiteTitle = 'DownTube'
 # ========== [ Flask route file registry ] ==========
 from .routes import api, static
 app.register_blueprint(api.apiBP, url_prefix='/api')
-app.register_blueprint(static.staticBP, url_prefix='/static')
+app.register_blueprint(static.staticBP, url_prefix='/')
 
 
 # ========== [ HTTP error handlings ] ==========
