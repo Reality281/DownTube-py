@@ -46,9 +46,9 @@ def adsTxt():
 	return send_file('ads.txt')# Sending ads.txt file to display on the route
 
 
-@app.route('/devs/')# Route for display of all the developers
+@app.route('/developers/')# Route for display of all the developers
 def devsList():
-	return render_template('devs.html', websiteTitle=websiteTitle)# Rendering devs.html
+	return render_template('developers.html', websiteTitle=websiteTitle)# Rendering developers.html
 
 
 @app.route('/video/', methods=['POST'])# Route to redirect user to the Video Info page
