@@ -22,7 +22,7 @@ app.register_blueprint(api.apiBP, url_prefix=f'/{api.apiBP.name}')
 # ========== [ HTTP error handlings ] ==========
 @app.errorhandler(404)# 404 Error Handling
 def error404(err):
-	return render_template('404.html', websiteTitle=websiteTitle)# Rendering 404.html
+	return render_template('404.html', websiteTitle=websiteTitle, err=err)# Rendering 404.html
 
 
 @app.errorhandler(405)# 405 Error Handling
