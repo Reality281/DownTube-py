@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, jsonify
 
 testBP = Blueprint('test', __name__)
 
@@ -13,3 +13,17 @@ def dynamicPage1():
 @testBP.route('/page2')
 def dynamicPage2():
     return render_template('testPage2.html')
+
+
+
+
+@testBP.route('/')
+def dynamicIndex2():
+    return render_template('testIndex2.html')
+
+@testBP.route('/update', methods=['POST'])
+def dynamicUpdate():
+    # Process the AJAX request and return updated content
+    # You can fetch data from a database or perform other operations here
+    data = {'message': 'New content'}
+    return jsonify(data)
