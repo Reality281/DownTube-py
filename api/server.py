@@ -15,8 +15,9 @@ app = Flask(__name__, template_folder='html', static_folder='public')
 websiteTitle = 'DownTube'
 
 # ========== [ Flask route file registry ] ==========
-from .routes.api import apiBP
-app.register_blueprint(apiBP, url_prefix='/api')
+from .routes import api, test
+app.register_blueprint(api.apiBP, url_prefix=f'/{api.apiBP.name}')
+app.register_blueprint(test.testBP, url_prefix=f'/{test.testBP.name}')
 
 
 # ========== [ HTTP error handlings ] ==========
