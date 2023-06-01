@@ -25,6 +25,11 @@ def error404(err):
 	return render_template('404.html', websiteTitle=websiteTitle)# Rendering 404.html
 
 
+@app.errorhandler(405)# 405 Error Handling
+def error405(err):
+	return render_template('405.html', websiteTitle=websiteTitle, err=err)# Rendering 405.html
+
+
 @app.errorhandler(500)# 500 Error Handling
 def error500(err):
 	return render_template('500.html', websiteTitle=websiteTitle)# Rendering 500.html

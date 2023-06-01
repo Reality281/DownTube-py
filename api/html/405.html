@@ -1,0 +1,27 @@
+{% extends "mainFrame.html" %}
+
+{% block title %}Error 405{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" href="/public/css/btn.css">
+  <style>
+    html, body {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="err">
+    <h1>Error 405 | Method Not Allowed</h1>
+    <h3>The method is not allowed for the requested URL.</h3><br/>{{ err }}
+  </div>
+  <a href="{{ request.url_root }}"><button class="btn">Return to Home Page</button></a>
+{% endblock %}
