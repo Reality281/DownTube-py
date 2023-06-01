@@ -17,7 +17,7 @@ def dynamicPage2():
 
 
 
-@testBP.route('/2')
+@testBP.route('/2/')
 def dynamicIndex2():
     return render_template('testIndex2.html')
 
