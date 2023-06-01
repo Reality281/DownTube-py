@@ -21,7 +21,7 @@
 {% block content %}
   <div class="err">
     <h1>Error 404 | Not Found Error</h1>
-    <h3>{{ request.url.split(request.url_root)[1].strip('/') }} - Not Found</h3><br/>{{ err }}
+    <h3>{{ request.url.split(request.url_root)[1].strip('/') }} - Not Found</h3><br/>
   </div>
   <a href="{{ request.url_root }}"><button class="btn">Return to Home Page</button></a>
 {% endblock %}
