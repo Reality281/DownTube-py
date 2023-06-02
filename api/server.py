@@ -1,6 +1,6 @@
 # ========== [ Python module imports ] ==========
-from flask import Flask, Response, Channel, render_template, request, send_file, redirect, url_for, abort
-from pytube import YouTube
+from flask import Flask, Response, render_template, request, send_file, redirect, url_for, abort
+from pytube import YouTube, Channel
 from pytube.exceptions import VideoUnavailable
 from datetime import datetime, timedelta
 import os, requests
