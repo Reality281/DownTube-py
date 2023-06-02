@@ -22,7 +22,7 @@
 {% block content %}
   <div class="err">
     <h1>Error 500 | Internal Server Error</h1>
-    <h3>{{ request.url.split(request.url_root)[1].strip('/') }} - The server encountered an internal error and was unable to complete your request</h3>
+    <h3>{{ request.url.split(request.url_root)[1].strip('/') }} - {% if err %}err{% else %}The server encountered an internal error and was unable to complete your request{% endif %}</h3>
   </div>
   <a href="{{ request.url_root }}"><button class="btn">Return to Home Page</button></a>
 {% endblock %}

@@ -1,6 +1,7 @@
 # ========== [ Python module imports ] ==========
-from flask import Flask, Response, render_template, request, send_file, redirect, url_for
+from flask import Flask, Response, render_template, request, send_file, redirect, url_for, abort
 from pytube import YouTube
+from pytube.exceptions import VideoUnavailable
 from datetime import datetime, timedelta
 import os, requests
 
@@ -32,7 +33,7 @@ def error405(err):
 
 @app.errorhandler(500)# 500 Error Handling
 def error500(err):
-	return render_template('500.html', websiteTitle=websiteTitle)# Rendering 500.html
+	return render_template('500.html', websiteTitle=websiteTitle, err=err.split(':')[0].strip())# Rendering 500.html
 
 
 # ========== [ Server Routes ] ==========
@@ -69,7 +70,10 @@ def redirectToVideoInfoPage():
 def getVideoInfo(videoID):
 	YTVideoURL = getVideoLink(videoID)# Getting the yt video link using the id of the video
 	try:
-		yt = YouTube(YTVideoURL)# Getting a YouTube object using the yt video link
+		try:
+			yt = YouTube(YTVideoURL)# Getting a YouTube object using the yt video link
+		except VideoUnavailable:
+			pass
 		views = convertViews(yt.views)# Getting the number of views the video has and converting them to more readable format
 		length = convertTime(yt.length)# Getting the duration of the video and converting them to more readable format
 		return render_template(# Rendering videoInfo.html
@@ -83,7 +87,8 @@ def getVideoInfo(videoID):
 		                        videoStreams=yt.streams.filter(progressive=True).order_by('resolution'),# Getting streams with both audio and video objects and rearranging them according resolution
 		                        audioStreams=yt.streams.filter(only_audio=True))# Getting streams with only audio objects
 	except Exception as e:
-		return showError(videoURL=YTVideoURL, errURL='/video', err=e)# Displaying error if any error occurs
+		#return showError(videoURL=YTVideoURL, errURL='/video', err=e)# Displaying error if any error occurs
+		abort(500, f'An error occured while extracting information from `{YTVideoURL}`')
 
 
 @app.route('/download/', methods=['POST'])# Route to redirect the user to the download page of the video
