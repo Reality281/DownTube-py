@@ -9,7 +9,7 @@
 {% block content %}
 	<h1>{{ yt.title }}</h1>
 	<iframe class="vidEmbed" src="https://www.youtube.com/embed/{{ videoID }}" frameborder="0" allowfullscreen></iframe><br>
-	<p><strong>Channel: </strong><a href="{{ yt.channel_url }}" target="_blank">{{ Channel(yt.channel_url).channel_name }}</a></p>
+	<p><strong>Channel: </strong><a href="{{ yt.channel_url }}" target="_blank">{{ channelName }}</a></p>
 	<p><strong>Views: </strong>{{ views }}</p>
 	<p><strong>Length: </strong>{{ length }}</p><br>
 	<form method="post" action="{{ url_for('redirectToVideoDownloadPage') }}">

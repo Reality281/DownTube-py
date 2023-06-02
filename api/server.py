@@ -99,6 +99,7 @@ def getVideoInfoDebug(videoID):
 			yt = YouTube(YTVideoURL)# Getting a YouTube object using the yt video link
 		except VideoUnavailable:
 			pass
+		channelName = Channel(yt.channel_url).channel_name
 		views = convertViews(yt.views)# Getting the number of views the video has and converting them to more readable format
 		length = convertTime(yt.length)# Getting the duration of the video and converting them to more readable format
 		return render_template(# Rendering videoInfo.html
@@ -106,6 +107,7 @@ def getVideoInfoDebug(videoID):
 				                yt=yt,
 		                        views=views,
 		                        length=length,
+								channelName=channelName,
 		                        websiteTitle=websiteTitle,
 		                        videoID=yt.video_id,
 		                        YTVideoURL=YTVideoURL,
