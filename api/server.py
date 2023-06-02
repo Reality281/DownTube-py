@@ -91,7 +91,7 @@ def getVideoInfo(videoID):
 		abort(500, f'An error occured while extracting information from `{YTVideoURL}`')
 
 
-@app.route('/videodebug/<videoID>/')# Route to display Information of the Video
+@app.route('/video/debug/<videoID>/')# Route to display Information of the Video
 def getVideoInfoDebug(videoID):
 	YTVideoURL = getVideoLink(videoID)# Getting the yt video link using the id of the video
 	try:
