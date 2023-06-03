@@ -12,4 +12,4 @@ def sayHello(name):
 def apiGetVideoInfo():
     if request.is_json:
         videoID = getVideoID(request.args.get('video_url'))
-        return jsonify({'videoID': videoID})
+        return jsonify({'video_id': videoID})

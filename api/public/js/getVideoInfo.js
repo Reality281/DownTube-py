@@ -8,7 +8,7 @@ $(document).ready(function() {
 				video_url: $('#video_url').value()
 			},
 			success: function(response) {
-				$('#getInfoBtn').text(response.videoID)
+				$('#getInfoBtn').text(response.video_id)
 			}
 		})
 	})
