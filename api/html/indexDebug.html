@@ -36,6 +36,11 @@
     <script>
         function getVideoInfo() {
             console.log("Getting video info")
+            $.ajax({
+                type: "POST",
+                url: "",
+                data: {"name" : "Test"}
+            })
         }
     </script>
 {% endblock %}
