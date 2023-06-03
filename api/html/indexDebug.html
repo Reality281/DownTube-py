@@ -7,6 +7,10 @@
 	<link rel="stylesheet" href="/public/css/tutorialBox.css">
 {% endblock %}
 
+{% block js %}
+	<script src="/public/js/getVideoInfo.js"></script>
+{% endblock %}
+
 {% block content %}
 	<h1>Download Youtube Video for free!</h1>
 	<!--<form method="post" action="{{ url_for('redirectToVideoInfoPage') }}">
@@ -17,7 +21,7 @@
 
     <label for="video_url" name="Video URL">Enter a YouTube video URL:</label>
 	<input class="inputBox" type="text" name="video_url" id="video_url" autocomplete="off" required>
-	<button onclick="getVideoInfo()" class="btn">Get Info</button>
+	<button id="getInfoBtn" class="btn">Get Info</button>
 
     <div id="videoInfo">
         Video Info will be shown here.
