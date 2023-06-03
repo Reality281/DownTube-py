@@ -42,6 +42,11 @@ def index():
 	return render_template('index.html', websiteTitle=websiteTitle)# Rendering index.html
 
 
+@app.route('/index/debug/')
+def indexDebug():
+	return render_template('indexDebug.html', websiteTitle=websiteTitle)
+
+
 @app.route('/favicon.ico/')# Route for favicon display of the website
 def favicon():
 	return render_template('favicon.html', websiteTitle=websiteTitle)# Rendering favicon.html
