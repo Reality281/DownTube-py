@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    console.log($('#video_url').value())
 	$('#getInfoBtn').click(function() {
 		$.ajax({
 			url: '/api/getVideoInfo',
