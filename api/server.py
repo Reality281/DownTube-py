@@ -33,7 +33,7 @@ def error405(err):
 
 @app.errorhandler(500)# 500 Error Handling
 def error500(err):
-	return render_template('500.html', websiteTitle=websiteTitle, err=err.split(':')[0].strip())# Rendering 500.html
+	return render_template('500.html', websiteTitle=websiteTitle, err=str(err).split(':')[0].strip())# Rendering 500.html
 
 
 # ========== [ Server Routes ] ==========
