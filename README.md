@@ -6,4 +6,5 @@
 - Paste the URL in the URL box
 - Click on "Get Info" to get the information about the video/shorts
 - Choose the video quality from the dropdown menu
-- Click on "Download" to start the download
+- Click on "Download" to redirect to a page to download the video
+- Click on 3 dots and select download
