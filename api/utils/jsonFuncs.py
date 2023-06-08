@@ -1,6 +1,7 @@
 import json
 
 def loadData(path):
+    path = f'../{str(path).strip('/')}'
     try:
         with open(path) as file:
             data = json.load(file)
