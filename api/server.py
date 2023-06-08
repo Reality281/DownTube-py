@@ -23,7 +23,6 @@ except Exception as e:
 	websiteTitle = 'error'
 """config = loadData('./config.json')
 websiteTitle = config"""
-websiteTitle = str(os.path.join(os.get_cwd(), 'config.json'))
 
 # ========== [ Flask route file registry ] ==========
 try:
