@@ -9,7 +9,7 @@ import os, requests
 from .utils.convertors import convertTime, convertViews
 from .utils.videoFuncs import getVideoID, getVideoLink
 from .utils.err import showError
-#from .utils.jsonFuncs import loadData
+from .utils.jsonFuncs import loadData
 
 
 # ========== [ Variables ] ==========
