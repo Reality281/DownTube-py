@@ -1,5 +1,6 @@
 def loadData(path):
-    import json
+    import json, os
+    path = os.path.join(os.getcwd(), f'../{path}')
     try:
         with open(path) as file:
             data = json.load(file)
