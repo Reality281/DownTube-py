@@ -15,7 +15,7 @@ from .utils.jsonFuncs import loadData
 # ========== [ Variables ] ==========
 app = Flask(__name__, template_folder='html', static_folder='public')
 try:
-	config = loadData('./config.json')
+	config = loadData(os.path.join(os.get_cwd(), 'config.json'))
 	websiteTitle = config
 except Exception as e:
 	print(f'An error occured while loading config file\n{e}')
