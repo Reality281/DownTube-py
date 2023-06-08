@@ -1,6 +1,11 @@
 def loadData(path):
-    import json, os
-    path = os.path.join(os.getcwd(), f'../{path}')
+    import json
+    try:
+        newPath = str(path).strip('./')
+    except:
+        newPath = str(path).strip('/')
+    finally:
+        path = f'../{path}'
     try:
         with open(path) as file:
             data = json.load(file)
