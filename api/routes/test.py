@@ -1,7 +1,13 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 from pytube import YouTube, Channel
 from pytube.exceptions import VideoUnavailable
 from ..utils.videoFuncs import getVideoID, getVideoLink
+from ..utils.jsonFuncs import loadData
+
+
+config = loadData('../config.json')
+websiteTitle = config['websiteTitle']
+
 
 testBP = Blueprint('test', __name__)
 

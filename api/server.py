@@ -9,11 +9,13 @@ import os, requests
 from .utils.convertors import convertTime, convertViews
 from .utils.videoFuncs import getVideoID, getVideoLink
 from .utils.err import showError
+from .utils.jsonFuncs import loadData
 
 
 # ========== [ Variables ] ==========
 app = Flask(__name__, template_folder='html', static_folder='public')
-websiteTitle = 'DownTube'
+config = loadData('./config.json')
+websiteTitle = config['websiteTitle']
 
 # ========== [ Flask route file registry ] ==========
 try:
