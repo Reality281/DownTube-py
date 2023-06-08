@@ -5,7 +5,7 @@ def loadData(path):
     except:
         newPath = str(path).strip('/')
     finally:
-        path = f'../{path}'
+        path = f'../{newPath}'
     try:
         with open(path) as file:
             data = json.load(file)
