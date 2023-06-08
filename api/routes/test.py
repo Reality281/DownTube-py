@@ -6,12 +6,12 @@ from ..utils.videoFuncs import getVideoID, getVideoLink
 testBP = Blueprint('test', __name__)
 
 
-@app.route('/')
+@testBP.route('/')
 def indexDebug():
 	return render_template('indexDebug.html', websiteTitle=websiteTitle)
 
 
-@app.route('/video/<videoID>/')# Route to display Information of the Video
+@testBP.route('/video/<videoID>/')# Route to display Information of the Video
 def getVideoInfoDebug(videoID):
 	YTVideoURL = getVideoLink(videoID)# Getting the yt video link using the id of the video
 	try:
