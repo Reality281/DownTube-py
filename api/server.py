@@ -15,7 +15,7 @@ from .utils.jsonFuncs import loadData
 # ========== [ Variables ] ==========
 app = Flask(__name__, template_folder='html', static_folder='public')
 config = loadData('./config.json')
-websiteTitle = config['websiteTitle']
+websiteTitle = config
 
 # ========== [ Flask route file registry ] ==========
 try:
