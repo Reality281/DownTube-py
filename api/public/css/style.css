@@ -64,6 +64,20 @@ a:hover {
 	height: 315px;
 }
 
+.videoContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+.videoContainer .item {
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.videoContainer .item .horizontal {
+	flex-direction: row;
+}
+
 .tutorialBox {
 	height: auto;
 	width: 100px;

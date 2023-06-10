@@ -5,7 +5,7 @@ from ..utils.videoFuncs import getVideoID, getVideoLink
 from ..utils.jsonFuncs import loadData
 
 
-config = loadData('../config.json')
+config = loadData('config.json')
 websiteTitle = config['websiteTitle']
 
 
