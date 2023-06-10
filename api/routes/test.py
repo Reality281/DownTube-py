@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template
 from pytube import YouTube, Channel
 from pytube.exceptions import VideoUnavailable
+from ..utils.convertors import convertTime, convertViews
 from ..utils.videoFuncs import getVideoID, getVideoLink
 from ..utils.jsonFuncs import loadData
 
