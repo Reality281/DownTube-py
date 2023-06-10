@@ -1,6 +1,6 @@
 def loadData(path):
     import json
-    path = str(path).replace('../', '') if str(path).startswith('../') else str(path).replace('./', '') if str(path).startwith('./') else str(path)
+    path = str(path).replace('../', '') if str(path).startswith('../') else str(path).replace('./', '') if str(path).startswith('./') else str(path)
     path = f'api/{path}'
     try:
         with open(path) as file:
