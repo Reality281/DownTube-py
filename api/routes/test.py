@@ -20,13 +20,13 @@ def indexDebug():
 
 @testBP.route('/video/')# Route to display Information of the Video
 def getVideoInfoDebug():
-	if request.form['videoURL']:
-		videoID = getVideoID(request.form['videoURL'])# Getting the yt video id from the url of the video
+	if request.form['video_url']:
+		YTVideoURL = getVideoLink(getVideoID(request.form['video_url']))# Getting the yt video id from the url of the video
 	else:
 		showError(videoURL='noURL', errURL='/video', err='No URL Provided')# Displaying error if no video url is provided
 	try:
 		try:
-			yt = YouTube(videoID)# Getting a YouTube object using the yt video link
+			yt = YouTube(YTVideoURL)# Getting a YouTube object using the yt video link
 		except VideoUnavailable:
 			pass
 		channelName = Channel(yt.channel_url).channel_name
