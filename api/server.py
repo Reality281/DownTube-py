@@ -23,11 +23,6 @@ try:
 	app.register_blueprint(api.apiBP, url_prefix=f'/{api.apiBP.name}')
 except Exception as e:
 	print(f'An error occured while adding the routes "/{api.apiBP.name}/*" to the application')
-try:
-	from .routes import test
-	app.register_blueprint(test.testBP, url_prefix=f'/{test.testBP.name}')
-except Exception as e:
-	print(f'An error occured while adding the routes "/{test.testBP.name}/*" to the application')
 
 
 # ========== [ HTTP error handlings ] ==========
