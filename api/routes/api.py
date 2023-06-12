@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request
 import pytube
 from ..utils.videoFuncs import getVideoID, getVideoLink
-from .utils.err import showError
-from .utils.jsonFuncs import loadData
+from ..utils.err import showError
+from ..utils.jsonFuncs import loadData
 
 apiBP = Blueprint('api', __name__)
 config = loadData('config.json')
