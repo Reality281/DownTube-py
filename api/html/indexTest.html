@@ -17,7 +17,7 @@
             e.preventDefault();
             var videoUrl = $('#video-url').val();
             $.ajax({
-                url: "api/get_video_info/",
+                url: "get_video_info/",
                 data: {video_url: videoUrl},
                 success: function(data) {
                     $('#video-info').html(data);
