@@ -1,4 +1,32 @@
-<div>
-    <h1>{{ title }}</h1>
-    <p>{{ description }}</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Video Info</title>
+</head>
+<body>
+    <form id="video-form">
+        <input type="text" id="video-url" placeholder="Enter YouTube video URL">
+        <button type="submit">Get Video Info</button>
+    </form>
+    <div id="video-info"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#video-form').submit(function(e) {
+            e.preventDefault();
+            var videoUrl = $('#video-url').val();
+            $.ajax({
+                url: "/get_video_info",
+                data: {video_url: videoUrl},
+                success: function(data) {
+                    $('#video-info').html(data);
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
