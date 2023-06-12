@@ -4,6 +4,9 @@ from ..utils.videoFuncs import getVideoID, getVideoLink
 from .utils.err import showError
 
 apiBP = Blueprint('api', __name__)
+config = loadData('config.json')
+websiteTitle = config['websiteTitle']
+from .utils.jsonFuncs import loadData
 
 @apiBP.route('/<name>/')# Route to api that says hello to the user
 def sayHello(name):
@@ -13,7 +16,7 @@ def sayHello(name):
 def indexTest():
     return render_template('indexTest.html')
 
-@apiBP.route('/get_video_info/')
+@apiBP.route('/get_video_info2/')
 def get_video_info():
     video_url = request.args.get('video_url')
     try:
