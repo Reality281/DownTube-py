@@ -1,15 +1,16 @@
-$(document).ready(function() {
-    console.log($('#video_url').value())
-	$('#getInfoBtn').click(function() {
+$(document).ready(function () {
+	$('#getInfoBtn').click(function () {
 		$.ajax({
-			url: '/api/getVideoInfo',
-			type: 'GET',
-			contentType: 'application/json',
+			url: '/test/video/',
+			dataType: 'html',
 			data: {
-				video_url: $('#video_url').value()
+				videoURL: $('#video_url')
 			},
-			success: function(response) {
-				$('#getInfoBtn').text(response.video_id)
+			success: function (response) {
+				$('#videoInfoDiv').html(response);
+			},
+			error: function () {
+				$('#videoInfoDiv').text('Error! Unable to get the video...');
 			}
 		})
 	})
