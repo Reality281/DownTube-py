@@ -92,8 +92,8 @@ def getVideoInfo(videoID):
 		                        websiteTitle=websiteTitle,
 		                        videoID=yt.video_id,
 		                        YTVideoURL=YTVideoURL,
-		                        videoStreams=yt.streams.filter(progressive=True).order_by('resolution'),# Getting streams with both audio and video objects and rearranging them according resolution
-		                        audioStreams=yt.streams.filter(only_audio=True))# Getting streams with only audio objects
+		                        videoStreams=yt.streams.filter(progressive=True).order_by('resolution').desc().all(),# Getting streams with both audio and video objects and rearranging them according resolution
+		                        audioStreams=yt.streams.filter(only_audio=True).order_by('filesize').desc().all())# Getting streams with only audio objects and rearranging them according filesize
 	except Exception as e:
 		return showError(videoURL=YTVideoURL, errURL='/video', err=e)# Displaying error if any error occurs
 
