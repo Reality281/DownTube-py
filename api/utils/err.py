@@ -1,3 +1,5 @@
+from flask import render_template
+
 def showError(videoURL, errURL, err):# Function to display errors
 	print(f'An Error Occured in "{errURL}" url:\n', err)# Printing the error to the console
 	if videoURL == 'noURL':# Checking if the error is due to no url of the yt video
