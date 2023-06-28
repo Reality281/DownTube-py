@@ -16,6 +16,8 @@ def sayHello(name):
 def indexTest():
     return render_template('indexTest.html')
 
+
+"""
 @apiBP.route('/get_video_info2/')
 def get_video_info():
     video_url = request.args.get('video_url')
@@ -26,7 +28,7 @@ def get_video_info():
         return render_template('videoInfo.html', title=title, description=description)
     except Exception as e:
         return str(e)
-    
+"""
 
 
 @apiBP.route('/get_video_info/')# Route to display Information of the Video

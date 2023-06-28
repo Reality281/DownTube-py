@@ -9,7 +9,6 @@ from .utils.convertors import convertTime, convertViews
 from .utils.videoFuncs import getVideoID, getVideoLink
 from .utils.err import showError
 from .utils.jsonFuncs import loadData
-from . import config
 
 
 # ========== [ Variables ] ==========
@@ -96,8 +95,7 @@ def getVideoInfo(videoID):
 		                        videoStreams=yt.streams.filter(progressive=True).order_by('resolution'),# Getting streams with both audio and video objects and rearranging them according resolution
 		                        audioStreams=yt.streams.filter(only_audio=True))# Getting streams with only audio objects
 	except Exception as e:
-		#return showError(videoURL=YTVideoURL, errURL='/video', err=e)# Displaying error if any error occurs
-		abort(500, f'An error occured while extracting information from `{YTVideoURL}`')
+		return showError(videoURL=YTVideoURL, errURL='/video', err=e)# Displaying error if any error occurs
 
 
 @app.route('/download/', methods=['POST'])# Route to redirect the user to the download page of the video
