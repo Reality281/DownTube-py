@@ -1,6 +1,10 @@
-from flask import render_template
-
 def showError(videoURL, errURL, err):# Function to display errors
+	from flask import render_template
+	from ..utils.jsonFuncs import loadData
+
+	config = loadData('config.json')
+	websiteTitle = config['websiteTitle']
+
 	print(f'An Error Occured in "{errURL}" url:\n', err)# Printing the error to the console
 	if videoURL == 'noURL':# Checking if the error is due to no url of the yt video
 		title = 'No URL Provided'
