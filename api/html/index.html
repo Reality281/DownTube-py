@@ -14,7 +14,7 @@
 
 {% block content %}
 	<h1>Download Youtube Video for free!</h1>
-	<form id="getVideoInfoForm">
+	<form method="post" action="{{ url_for('redirectToVideoInfoPage') }}" id="getVideoInfoForm">
 		<label for="video_url" name="Video URL">Enter a YouTube video URL:</label>
 		<input class="inputBox" type="text" name="video_url" id="video_url" autocomplete="off" required>
 		<button type="submit" class="btn">Get Info</button>
