@@ -112,7 +112,7 @@ def redirectToVideoDownloadPage():
 
 
 @app.route('/video/download/<videoID>/<streamITag>/')# Route to redirect the user to the url to download the yt video
-def vidoeDownload(videoID, streamITag):
+def videoDownload(videoID, streamITag):
 	YTVideoURL = getVideoLink(videoID)# Getting the video link of the yt video using the id of the video
 	try:
 		yt = YouTube(YTVideoURL)# Getting a YouTube object using the yt video link
@@ -124,6 +124,13 @@ def vidoeDownload(videoID, streamITag):
 	except Exception as e:
 		return showError(videoURL=YTVideoURL, errURL='/video/download', err=e)# Displaying error if any error occurs
 
+@app.route('/downloads/')
+def downloads():
+	return render_template('downloads.html', websiteTitle=websiteTitle)
+
+@app.route('/downloads/<versionID>/')
+def downloadVer(versionID):
+	return send_file('/setupFiles/DownTube_setup_0.1.exe', as_attachment=True, download_name='DownTube_setup_0.1.exe')
 
 # ========== [ Running Server ] ==========
 if __name__ == '__main__':

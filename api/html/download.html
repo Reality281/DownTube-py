@@ -1,0 +1,19 @@
+{% extends "mainFrame.html" %}
+
+{% block title %}Download{% endblock %}
+
+{% block content %}
+  <h1>Download DownTube for Free!</h1>
+  <table>
+    <tr>
+        <th>Release Version</th>
+        <th>Release Date</th>
+        <th>Download Link</th>
+    </tr>
+    <tr>
+        <th>Downtube 0.1</th>
+        <th>Dec. 27, 2023</th>
+        <th><button href="{{ request.url_root }}/download/0_1">Download</button></th>
+    </tr>
+  </table>
+{% endblock %}
