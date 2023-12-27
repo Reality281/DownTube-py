@@ -130,7 +130,8 @@ def downloads():
 
 @app.route('/downloads/<versionID>/')
 def downloadVer(versionID):
-	return send_file('/setupFiles/DownTube_setup_0.1.exe', as_attachment=True, download_name='DownTube_setup_0.1.exe')
+	version = versionID.split('_').join('.')
+	return send_file(f'/setupFiles/DownTube_setup_{version}.exe', as_attachment=True, download_name='DownTube_setup_0.1.exe')
 
 # ========== [ Running Server ] ==========
 if __name__ == '__main__':
