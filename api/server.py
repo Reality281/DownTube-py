@@ -98,21 +98,21 @@ def getVideoInfo(videoID):
 		return showError(videoURL=YTVideoURL, errURL='/video', err=e)# Displaying error if any error occurs
 
 
-@app.route('/download/', methods=['POST'])# Route to redirect the user to the download page of the video
+@app.route('/video/download/', methods=['POST'])# Route to redirect the user to the download page of the video
 def redirectToVideoDownloadPage():
 	if request.form['video_url']:
 		videoID = getVideoID(request.form['video_url'])# Getting the yt video id from the url of the video
 	else:
-		return showError(videoURL='noURL', errURL='/download', err='No URL Provided')# Displaying error if no video url is provided
+		return showError(videoURL='noURL', errURL='/video/download', err='No URL Provided')# Displaying error if no video url is provided
 	if request.form['stream']:
 		streamITag = request.form['stream']# Getting the stream of the video the user wants to download
 	else:
-		return showError(videoURL=getVideoLink(videoID), errURL='/download', err='No Stream Provided')# Displaying error if no stream is provided
-	return redirect(url_for('download', videoID=videoID, streamITag=streamITag))# Redirecting the user to the download page with the video id and video stream
+		return showError(videoURL=getVideoLink(videoID), errURL='/video/download', err='No Stream Provided')# Displaying error if no stream is provided
+	return redirect(url_for('videoDownload', videoID=videoID, streamITag=streamITag))# Redirecting the user to the download page with the video id and video stream
 
 
-@app.route('/download/<videoID>/<streamITag>/')# Route to redirect the user to the url to download the yt video
-def download(videoID, streamITag):
+@app.route('/video/download/<videoID>/<streamITag>/')# Route to redirect the user to the url to download the yt video
+def vidoeDownload(videoID, streamITag):
 	YTVideoURL = getVideoLink(videoID)# Getting the video link of the yt video using the id of the video
 	try:
 		yt = YouTube(YTVideoURL)# Getting a YouTube object using the yt video link
@@ -120,9 +120,9 @@ def download(videoID, streamITag):
 		filename = f'DownTube-{yt.title}.{stream.mime_type.split("/")[-1]}'# Filename of the yt video
 		#return redirect(stream.url, code=302)# Redirecting the user to the url to download yt video
 		#return send_file(stream.url, mimetype=stream.mime_type, as_attachment=True, download_name=filename)
-		return render_template('download.html', websiteTitle=websiteTitle, url=stream.url, title=yt.title)
+		return render_template('videoDownload.html', websiteTitle=websiteTitle, url=stream.url, title=yt.title)
 	except Exception as e:
-		return showError(videoURL=YTVideoURL, errURL='/download', err=e)# Displaying error if any error occurs
+		return showError(videoURL=YTVideoURL, errURL='/video/download', err=e)# Displaying error if any error occurs
 
 
 # ========== [ Running Server ] ==========
