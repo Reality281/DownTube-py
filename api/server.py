@@ -132,9 +132,7 @@ def downloads():
 @app.route('/downloads/<versionID>/')
 def downloadVer(versionID):
 	version = '.'.join(versionID.split('_'))
-	#return send_file(f'./setupFiles/DownTube_setup_{version}.exe', as_attachment=True, download_name=f'DownTube_setup_{version}.exe')
-	#return Response(response=f'./sendFiles/DownTube_setup_{version}.exe', status=200, mimetype='application/vnd.microsoft.portable-executable')
-	return send_from_directory('./sendFiles', f'DownTube_setup_{version}.exe')
+	return send_file(f'./setupFiles/DownTube_setup_{version}.exe', as_attachment=True, download_name=f'DownTube_setup_{version}.exe')
 
 # ========== [ Running Server ] ==========
 if __name__ == '__main__':
