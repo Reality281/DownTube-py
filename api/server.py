@@ -3,6 +3,7 @@ from flask import Flask, Response, render_template, request, send_file, redirect
 from pytube import YouTube, Channel
 from pytube.exceptions import VideoUnavailable
 import json
+from io import BytesIO
 
 # ========== [ Local Python file imports ] ==========
 from .utils.convertors import convertTime, convertViews
@@ -131,7 +132,10 @@ def downloads():
 @app.route('/downloads/<versionID>/')
 def downloadVer(versionID):
 	version = '.'.join(versionID.split('_'))
-	return send_file(f'./setupFiles/DownTube_setup_{version}.exe', as_attachment=True, download_name='DownTube_setup_0.1.exe')
+	with open(f'./setupFiles/DownTube_setup_{version}.exe', 'rb') as f:
+		buf = BytesIO(f.read())
+
+	return send_file(buf, as_attachment=True, download_name=f'DownTube_setup_{version}.exe')
 
 # ========== [ Running Server ] ==========
 if __name__ == '__main__':
