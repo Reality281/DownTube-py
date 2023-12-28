@@ -1,5 +1,5 @@
 # ========== [ Python module imports ] ==========
-from flask import Flask, Response, render_template, request, send_file, redirect, url_for, abort
+from flask import Flask, Response, render_template, request, send_file, redirect, url_for, abort, send_from_directory
 from pytube import YouTube, Channel
 from pytube.exceptions import VideoUnavailable
 import json
@@ -133,7 +133,8 @@ def downloads():
 def downloadVer(versionID):
 	version = '.'.join(versionID.split('_'))
 	#return send_file(f'./setupFiles/DownTube_setup_{version}.exe', as_attachment=True, download_name=f'DownTube_setup_{version}.exe')
-	return Response(response=f'./sendFiles/DownTube_setup_{version}.exe', status=200, mimetype='application/vnd.microsoft.portable-executable')
+	#return Response(response=f'./sendFiles/DownTube_setup_{version}.exe', status=200, mimetype='application/vnd.microsoft.portable-executable')
+	return send_from_directory('./sendFiles', f'DownTube_setup_{version}.exe')
 
 # ========== [ Running Server ] ==========
 if __name__ == '__main__':
