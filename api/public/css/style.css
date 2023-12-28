@@ -20,6 +20,10 @@ a:hover {
 	text-decoration: underline;
 }
 
+table, th, td {
+	border: 1px solid red;
+}
+
 .main {
 	padding-top: 200px;
 	padding-bottom: 200px;
