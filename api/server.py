@@ -132,7 +132,7 @@ def downloads():
 @app.route('/downloads/<versionID>/')
 def downloadVer(versionID):
 	version = '.'.join(versionID.split('_'))
-	with open(f'./setupFiles/DownTube_setup_{version}.exe', 'rb') as f:
+	with open(f'./api/setupFiles/DownTube_setup_{version}.exe', 'rb') as f:
 		buf = BytesIO(f.read())
 
 	return send_file(buf, as_attachment=True, download_name=f'DownTube_setup_{version}.exe')
