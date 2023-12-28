@@ -5,8 +5,20 @@
 {% block css %}
   <link rel="stylesheet" href="/public/css/btn.css">
   <style>
+    html, body {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+    
     table, th, td {
 	    border: 1px solid red;
+      border-collapse: collapse;
     }
   </style>
 {% endblock %}
