@@ -132,7 +132,9 @@ def downloads():
 @app.route('/downloads/<versionID>/')
 def downloadVer(versionID):
 	version = '.'.join(versionID.split('_'))
-	return send_file(f'./setupFiles/DownTube_setup_{version}.exe', as_attachment=True, download_name=f'DownTube_setup_{version}.exe')
+	url = f'https://github.com/Reality281/DownTube-py/releases/download/DownTube_Windows/DownTube_setup_{version}.exe'
+	return redirect(url)
+	#return send_file(f'./setupFiles/DownTube_setup_{version}.exe', as_attachment=True, download_name=f'DownTube_setup_{version}.exe')
 
 # ========== [ Running Server ] ==========
 if __name__ == '__main__':
