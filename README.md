@@ -13,4 +13,4 @@
 - Fork the repository
 - Go to [Vercel](https://vercel.com)
 - Create new project and choose the fork
-And you are done ✅ the repository is fully configured and doesn't need any more configuration to run on [Vercel](https://vercel.com)
+- And you are done ✅ the repository is fully configured and doesn't need any more configuration to run on [Vercel](https://vercel.com)
